@@ -18,27 +18,38 @@ from langchain_community.vectorstores import Chroma
 
 
 
-pdf_path = "./data/CompanyPolicy.pdf"
-
+from config import *
+pdf_path = PDF_PATH
 loader = PyPDFLoader(pdf_path)
 docs = loader.load()
 
 print(f"Pages Loaded: {len(docs)}")
 
+# splitter = RecursiveCharacterTextSplitter(
+#     chunk_size=1000,
+#     chunk_overlap=200
+# )
+
+# chunks = splitter.split_documents(docs)
+
+# print(f"\nTotal Chunks: {len(chunks)}")
+
+# print("\nFirst Chunk:\n")
+# print(chunks[0].page_content)
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50
+    chunk_size=CHUNK_SIZE,
+    chunk_overlap=CHUNK_OVERLAP
 )
 
 chunks = splitter.split_documents(docs)
 
-print(f"\nTotal Chunks: {len(chunks)}")
+print("\nMetadata of first 5 chunks:\n")
 
-print("\nFirst Chunk:\n")
-print(chunks[0].page_content)
+for chunk in chunks[:5]:
+    print(chunk.metadata)
 
 embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    model_name=EMBEDDING_MODEL
 )
 
 # vector = embedding_model.embed_query(
@@ -49,7 +60,7 @@ embedding_model = HuggingFaceEmbeddings(
 db = Chroma.from_documents(
     documents=chunks,
     embedding=embedding_model,
-    persist_directory="vectordb"
+    persist_directory=VECTOR_DB_PATH
 )
 
 print("Vector Database Created Successfully")

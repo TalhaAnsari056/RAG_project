@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Policy Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="left-panel">
+
+        <div class="header">
+
+            <h2>🧠 AI Policy Assistant</h2>
+
+            <span class="status">
+                🟢 Ollama Connected
+            </span>
+
+        </div>
+
+        <div id="chat-box" class="chat-box">
+
+            <div class="bot-message">
+
+                Hello 👋
+
+                <br><br>
+
+                Ask me anything about the Company Policy.
+
+            </div>
+
+        </div>
+
+        <div class="input-area">
+
+            <input
+                id="question"
+                placeholder="Ask your question..."
+            >
+
+            <button id="send-btn">
+
+                Send
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+
+        <h3>⚙ Runtime Pipeline</h3>
+
+        <div class="pipeline">
+
+            <div id="step-question" class="step">
+                Question
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div id="step-embedding" class="step">
+                Embedding
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div id="step-retriever" class="step">
+                Vector Search
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div id="step-prompt" class="step">
+                Prompt Builder
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div id="step-llm" class="step">
+                Ollama
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div id="step-answer" class="step">
+                Final Answer
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
