@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>AI Policy Assistant</title>
 
@@ -14,37 +19,68 @@
 
 <div class="container">
 
-    <div class="left-panel">
+    <!-- ================= LEFT PANEL ================= -->
+
+    <section class="left-panel">
 
         <div class="header">
 
-            <h2>🧠 AI Policy Assistant</h2>
+            <div>
 
-            <span class="status">
-                🟢 Ollama Connected
-            </span>
+                <h1>🧠 AI Policy Assistant</h1>
 
-        </div>
+                <p class="subtitle">
+                    Retrieval Augmented Generation (RAG)
+                </p>
 
-        <div id="chat-box" class="chat-box">
+            </div>
 
-            <div class="bot-message">
+            <div class="status">
 
-                Hello 👋
+                <span class="status-dot"></span>
 
-                <br><br>
-
-                Ask me anything about the Company Policy.
+                Ollama Connected
 
             </div>
 
         </div>
 
+
+        <!-- Chat -->
+
+        <div id="chat-box" class="chat-box">
+
+            <div class="bot-message">
+
+                <strong>Assistant</strong>
+
+                <br><br>
+
+                Hello 👋
+
+                <br><br>
+
+                Ask me anything about the uploaded Company Policy.
+
+            </div>
+
+        </div>
+
+
+        <!-- Input -->
+
         <div class="input-area">
 
             <input
+
                 id="question"
-                placeholder="Ask your question..."
+
+                type="text"
+
+                placeholder="Ask anything about the company policy..."
+
+                autocomplete="off"
+
             >
 
             <button id="send-btn">
@@ -55,51 +91,401 @@
 
         </div>
 
-    </div>
+    </section>
 
-    <div class="right-panel">
 
-        <h3>⚙ Runtime Pipeline</h3>
 
-        <div class="pipeline">
+    <!-- ================= RIGHT PANEL ================= -->
 
-            <div id="step-question" class="step">
-                Question
+    <aside class="right-panel">
+
+        <h2>
+
+            📊 Runtime Dashboard
+
+        </h2>
+
+
+        <!-- ================= Dashboard ================= -->
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <h4>🤖 Active Agent</h4>
+
+                <div id="agent-name">-</div>
+
             </div>
 
-            <div class="arrow">↓</div>
+            <div class="dashboard-card">
 
-            <div id="step-embedding" class="step">
-                Embedding
+                <h4>📈 Similarity</h4>
+
+                <div id="similarity">-</div>
+
             </div>
 
-            <div class="arrow">↓</div>
+            <div class="dashboard-card">
 
-            <div id="step-retriever" class="step">
-                Vector Search
+                <h4>⚡ Runtime</h4>
+
+                <div id="runtime">
+
+                    Waiting...
+
+                </div>
+
             </div>
 
-            <div class="arrow">↓</div>
+            <div class="dashboard-card">
 
-            <div id="step-prompt" class="step">
-                Prompt Builder
-            </div>
+                <h4>🎯 Confidence</h4>
 
-            <div class="arrow">↓</div>
+                <div id="confidence-value">
 
-            <div id="step-llm" class="step">
-                Ollama
-            </div>
+                    0%
 
-            <div class="arrow">↓</div>
+                </div>
 
-            <div id="step-answer" class="step">
-                Final Answer
+                <div class="progress">
+
+                    <div
+
+                        id="confidence-bar"
+
+                        class="progress-fill">
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-    </div>
+        <hr>
+
+
+        <!-- ================= Architecture ================= -->
+
+        <h3>
+
+            🧠 Runtime Architecture
+
+        </h3>
+
+        <div class="architecture">
+
+
+            <!-- QUESTION -->
+
+            <div class="node"
+
+                 id="node-question">
+
+                <div class="node-title">
+
+                    User Query
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-question">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- EMBEDDING -->
+
+            <div
+
+                class="node"
+
+                id="node-embedding">
+
+                <div class="node-title">
+
+                    Embedding
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-embedding">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- VECTOR -->
+
+            <div
+
+                class="node"
+
+                id="node-vector">
+
+                <div class="node-title">
+
+                    Vector Search
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-vector">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- THRESHOLD -->
+
+            <div
+
+                class="node"
+
+                id="node-threshold">
+
+                <div class="node-title">
+
+                    Similarity
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-threshold">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- ROUTER -->
+
+            <div
+
+                class="node"
+
+                id="node-router">
+
+                <div class="node-title">
+
+                    Router
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-router">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Branch -->
+
+            <div class="branch">
+
+
+                <div
+
+                    class="node small"
+
+                    id="node-greeting">
+
+                    <div class="node-title">
+
+                        Greeting
+
+                    </div>
+
+                    <div
+
+                        class="node-time"
+
+                        id="time-greeting">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <div
+
+                    class="node small"
+
+                    id="node-rag">
+
+                    <div class="node-title">
+
+                        PDF Agent
+
+                    </div>
+
+                    <div
+
+                        class="node-time"
+
+                        id="time-rag">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <div
+
+                    class="node small"
+
+                    id="node-scope">
+
+                    <div class="node-title">
+
+                        Scope Guard
+
+                    </div>
+
+                    <div
+
+                        class="node-time"
+
+                        id="time-scope">
+
+                        -
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- LLM -->
+
+            <div
+
+                class="node"
+
+                id="node-llm">
+
+                <div class="node-title">
+
+                    LLM
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-llm">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- ANSWER -->
+
+            <div
+
+                class="node"
+
+                id="node-answer">
+
+                <div class="node-title">
+
+                    Final Response
+
+                </div>
+
+                <div
+
+                    class="node-time"
+
+                    id="time-answer">
+
+                    -
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- ================= Retrieved Chunks ================= -->
+
+        <h3>
+
+            📄 Retrieved Chunks
+
+        </h3>
+
+        <div
+
+            id="chunks-panel">
+
+            Waiting for retrieval...
+
+        </div>
+
+    </aside>
 
 </div>
 
