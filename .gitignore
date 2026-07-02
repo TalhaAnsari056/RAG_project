@@ -10,3 +10,4 @@ venv/
 
 # ChromaDB
 vectordb/
+*.pyc
