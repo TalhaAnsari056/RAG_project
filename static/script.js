@@ -346,56 +346,38 @@ async function sendMessage() {
 
 
     const bot = document.createElement("div");
-
     bot.className = "bot-message";
 
-
-
     let html = `
-
     <b>Agent</b>
-
     <br>
-
     ${data.agent}
-
     <br><br>
-
     <b>Answer</b>
-
     <br><br>
-
     ${data.answer}
-
     `;
 
-
-
-    if (data.pages.length > 0) {
+    if (data.pages && data.pages.length > 0) {
+        // Map over the pages array. If a page number is null, undefined, or 0, 
+        // display a readable tag instead of the word 'null'.
+        const cleanPages = data.pages.map(p => {
+            return (p !== null && p !== undefined && p !== 0) ? p : "Image/Scanned Page";
+        });
 
         html += `
-
         <hr>
-
         <b>Source Pages</b>
-
         <br>
-
-        ${data.pages.join(", ")}
-
+        ${cleanPages.join(", ")}
         `;
-
     }
 
-
-
     bot.innerHTML = html;
-
     chatBox.appendChild(bot);
-
     chatBox.scrollTop = chatBox.scrollHeight;
-
 }
+
 
 
 

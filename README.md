@@ -1,36 +1,155 @@
-6️⃣ Professional README.md
-AI RAG Chatbot
-🚀 AI-Powered Retrieval-Augmented Generation Chatbot
+# 🤖 AI Policy Assistant (RAG Chatbot)
 
-A production-style Retrieval-Augmented Generation (RAG) chatbot that intelligently answers questions from company documents using semantic search, vector embeddings, and locally hosted Large Language Models via Ollama.
+An AI-powered Retrieval-Augmented Generation (RAG) chatbot that answers questions from company policy documents using semantic search, vector embeddings, and locally hosted Large Language Models (LLMs) with Ollama.
 
- used :(external software)
- -ollama  qwen3:8b
- -ollama  qwen2.5:0.5b
- -Tesseract OCR
- 
-Features
+---
 
-✔ Semantic Search using ChromaDB
+## ✨ Features
 
-✔ Local LLM Inference (Qwen)
+- Semantic Search using ChromaDB
+- Retrieval-Augmented Generation (RAG)
+- Local LLM Inference with Ollama (Qwen)
+- Intelligent Query Routing
+- Greeting Agent
+- PDF Knowledge Agent
+- Scope Guard Agent
+- OCR Support for Scanned PDFs
+- Confidence Score
+- Retrieved Chunks Display
+- Runtime Metrics
+- Similarity Score
+- Pipeline Visualization
+- Modern Interactive UI
 
-✔ Intelligent Query Routing
+---
 
-✔ Greeting Agent
+## 🛠️ Tech Stack
 
-✔ Scope Guard Agent
+### Backend
+- Python
+- Flask
+- LangChain
 
-✔ PDF Knowledge Agent
+### Vector Database
+- ChromaDB
 
-✔ Confidence Score
+### Embedding Model
+- sentence-transformers/all-MiniLM-L6-v2
 
-✔ Retrieved Chunks Display
+### Large Language Model
+- Ollama
+- Qwen 2.5
 
-✔ Real-time Pipeline Visualization
+### OCR
+- Tesseract OCR
 
-✔ Runtime Metrics
+---
 
-✔ Similarity Scores
+## 📂 Project Structure
 
-✔ Modern Interactive UI
+```
+RAG_PROJECT/
+│
+├── agents/
+├── data/
+├── static/
+├── templates/
+├── vectordb/
+├── app.py
+├── ingest.py
+├── retriever.py
+├── llm.py
+├── prompts.py
+├── config.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🚀 Installation
+
+### Clone Repository
+
+```bash
+git clone <repository-url>
+cd RAG_PROJECT
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+### Activate Environment
+
+Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+Linux/Mac
+
+```bash
+source .venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Install Ollama
+
+Download:
+
+https://ollama.com/download
+
+Pull the model:
+
+```bash
+ollama pull qwen2.5:3b
+```
+
+### Install Tesseract OCR
+
+Download:
+
+https://github.com/UB-Mannheim/tesseract/wiki
+
+---
+
+## Build Vector Database
+
+```bash
+python ingest.py
+```
+
+---
+
+## Run Application
+
+```bash
+python app.py
+```
+
+Open
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## Future Improvements
+
+- Multi-PDF Support
+- Conversation Memory
+- Streaming Responses
+- Hybrid Search
+- Re-ranking
+- Authentication
+- Docker Deployment

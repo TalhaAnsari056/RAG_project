@@ -3,11 +3,11 @@ from llm import generate_answer
 from prompts import RAG_PROMPT
 
 
-def pdf_response(question):
+def pdf_response(results, clean_question):
 
     # results = retrieve_documents(question)
     # 1. Unpack both the results and the clean_question from retriever.py
-    results, clean_question = retrieve_documents(question)
+    # results = retrieve_documents(clean_question)
 
     context = ""
 
@@ -19,21 +19,26 @@ def pdf_response(question):
 
     for doc, score in results:
 
-        context += doc.page_content + "\n\n"
+        # context += doc.page_content + "\n\n"
+        context += doc.page_content[:500] + "\n\n"
+        # Safely pull the standard "page" key created in ingest.py
+        page_num = doc.metadata.get("page")
 
-        pages.append(doc.metadata.get("page"))
+        # Only append to list if it's a valid page number to keep things clean
+        if page_num:
+            pages.append(page_num)
 
         scores.append(round(score, 4))
 
         chunks.append(
             {
-                "page": doc.metadata.get("page"),
+                "page": page_num,
                 "score": round(score, 4),
                 "text": doc.page_content[:300],
             }
         )
 
-    prompt = RAG_PROMPT.format(context=context, question=question)
+    prompt = RAG_PROMPT.format(context=context, question=clean_question)
 
     answer = generate_answer(prompt)
 
@@ -45,34 +50,23 @@ def pdf_response(question):
 
     confidence = 0
 
-    best = 999
+    best_dist = 999
 
     if scores:
-        best = scores[0]
+        best_dist = scores[0]
 
-    if best <= 0.60:
-
+    if best_dist <= 0.40:
         confidence = 99
-
-    elif best <= 0.75:
-
+    elif best_dist <= 0.70:
         confidence = 95
-
-    elif best <= 0.90:
-
-        confidence = 90
-
-    elif best <= 1.10:
-
-        confidence = 82
-
-    elif best <= 1.30:
-
-        confidence = 72
-
+    elif best_dist <= 0.95:
+        confidence = 88
+    elif best_dist <= 1.15:
+        confidence = 78
+    elif best_dist <= 1.30:
+        confidence = 60
     else:
-
-        confidence = 55
+        confidence = 45
         # confidence = round(max(0, (2 - scores[0]) / 2) * 100)
 
     return {
@@ -81,5 +75,5 @@ def pdf_response(question):
         "scores": scores,
         "chunks": chunks,
         "confidence": confidence,
-        "best_score": best,
+        "best_score": best_dist,
     }
